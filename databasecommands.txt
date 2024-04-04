@@ -1,0 +1,234 @@
+
+CREATE DATABASE ANITHA_ENGINEERING_COLLEGE;
+
+USE ANITHA_ENGINEERING_COLLEGE;
+
+drop database  ANITHA_ENGINEERING_COLLEGE;
+
+CREATE TABLE Teachers (
+    teacher_id INT PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    date_of_birth DATE,
+    gender ENUM('Male', 'Female', 'Other'),
+    subject_taught TEXT,
+    address TEXT,
+    phone_number TEXT,
+    USERNAME TEXT,
+    PASSWORD TEXT
+);
+
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    date_of_birth DATE,
+    gender ENUM('Male', 'Female', 'Other'),
+    year_in_engineering TEXT,
+    address TEXT,
+    phone_number TEXT,
+	USERNAME TEXT,
+    PASSWORD TEXT
+);
+
+CREATE TABLE Teacher_Student_Assignment (
+    assignment_id INT PRIMARY KEY,
+    teacher_id INT,
+    student_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES Teachers(teacher_id) ON DELETE SET NULL,
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+);
+
+CREATE TABLE Login_teacher(
+	indexno INT PRIMARY KEY,
+	teacher_id INT
+);
+INSERT INTO Login_teacher(indexno , teacher_id)
+values
+(0,-1);
+
+select * from Login_teacher;
+
+drop table Login_teacher;
+
+UPDATE Login_teacher
+SET TEACHER_ID = -10
+WHERE INDEXNO = 0;
+
+
+CREATE TABLE Login_student(
+	indexno INT primary KEY,
+	student_id INT
+);
+
+INSERT INTO Login_student(indexno , student_id )
+values
+(0,-1);
+
+select * from Login_student;
+
+CREATE TABLE Teacher_user_data (
+    assignment_id INT PRIMARY KEY,
+    teacher_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES Teachers(teacher_id) ON DELETE SET NULL
+);
+
+
+drop  table teachers ;
+
+
+-- Inserting teachers
+INSERT INTO Teachers (teacher_id, first_name, last_name, date_of_birth, gender, subject_taught, address, phone_number , username , password) 
+VALUES 
+    (1, 'Hemanth', 'Kumar', '1980-05-15', 'Male', 'Mathematics', '123 Park Street, Bangalore', '+91-9876543210' , "Hemanth123" , "KUMAR"  ),
+    (2, 'Sneha', 'Patel', '1975-08-22', 'Female', 'CSE', '456 Lake Road, Mumbai', '+91-8765432109' , "Neha143" , "ram" ),
+    (3, 'Rahul', 'Sharma', '1983-11-10', 'Male', 'IOT', '789 Hill Avenue, Delhi', '+91-7654321098' , "meow" , "meow12" );
+
+
+UPDATE TEACHERS SET first_name = "HEMANTH" WHERE teacher_id = 1;
+
+
+select username,password from teachers;
+
+
+select * from teachers;
+
+-- Inserting students
+INSERT INTO Students (student_id, first_name, last_name, date_of_birth, gender, year_in_engineering, address, phone_number, username, password) 
+VALUES 
+    (1, 'Priya', 'Patel', '2005-03-12', 'Female', '1st Year', '101 Oak Lane, Kolkata', '+91-9876543211', 'priya_patel', 'priya@123'),
+    (2, 'Rahul', 'Verma', '2006-07-25', 'Male', '2nd Year', '202 River Road, Chennai', '+91-8765432110', 'rahul_verma', 'rahul@123'),
+    (3, 'Ananya', 'Singh', '2004-11-05', 'Female', '3rd Year', '303 Pine Street, Hyderabad', '+91-7654321109', 'ananya_singh', 'ananya@123'),
+    (4, 'Amit', 'Shah', '2007-02-18', 'Male', '4th Year', '404 Garden Avenue, Pune', '+91-9876543212', 'amit_shah', 'amit@123'),
+    (5, 'Neha', 'Gupta', '2003-09-30', 'Female', '1st Year', '505 Maple Street, Jaipur', '+91-8765432111', 'neha_gupta', 'neha@123'),
+    (6, 'Rohit', 'Kumar', '2004-05-22', 'Male', '2nd Year', '606 Elm Drive, Lucknow', '+91-7654321110', 'rohit_kumar', 'rohit@123'),
+    (7, 'Sakshi', 'Yadav', '2006-12-14', 'Female', '3rd Year', '707 Lake View, Ahmedabad', '+91-9876543213', 'sakshi_yadav', 'sakshi@123'),
+    (8, 'Aditya', 'Chopra', '2005-08-08', 'Male', '4th Year', '808 Rose Street, Chandigarh', '+91-8765432112', 'aditya_chopra', 'aditya@123'),
+    (9, 'Kritika', 'Mishra', '2003-04-01', 'Female', '1st Year', '909 Valley Road, Nagpur', '+91-7654321111', 'kritika_mishra', 'kritika@123'),
+    (10, 'Raj', 'Sharma', '2007-11-20', 'Male', '2nd Year', '1010 High Street, Bhopal', '+91-9876543214', 'raj_sharma', 'raj@123'),
+    (11, 'Aishwarya', 'Jha', '2004-06-17', 'Female', '3rd Year', '1111 Beach Avenue, Surat', '+91-8765432113', 'aishwarya_jha', 'aishwarya@123'),
+    (12, 'Suresh', 'Rajput', '2006-03-04', 'Male', '4th Year', '1212 Hilltop Road, Visakhapatnam', '+91-7654321112', 'suresh_rajput', 'suresh@123'),
+    (13, 'Vandana', 'Gandhi', '2005-09-29', 'Female', '1st Year', '1313 Ocean View, Indore', '+91-9876543215', 'vandana_gandhi', 'vandana@123'),
+    (14, 'Rajesh', 'Kumar', '2007-01-15', 'Male', '2nd Year', '1414 Sunset Boulevard, Ludhiana', '+91-8765432114', 'rajesh_kumar', 'rajesh@123'),
+    (15, 'Divya', 'Sharma', '2003-08-12', 'Female', '3rd Year', '1515 Forest Lane, Agra', '+91-7654321113', 'divya_sharma', 'divya@123'),
+    (16, 'Ankit', 'Singh', '2004-04-07', 'Male', '4th Year', '1616 River View, Thane', '+91-9876543216', 'ankit_singh', 'ankit@123'),
+    (17, 'Pooja', 'Verma', '2006-10-23', 'Female', '1st Year', '1717 Hillside Drive, Varanasi', '+91-8765432115', 'pooja_verma', 'pooja@123'),
+    (18, 'Ravi', 'Gupta', '2005-05-18', 'Male', '2nd Year', '1818 Orchard Lane, Faridabad', '+91-7654321114', 'ravi_gupta', 'ravi@123'),
+    (19, 'Swati', 'Shah', '2003-12-07', 'Female', '3rd Year', '1919 Garden Street, Patna', '+91-9876543217', 'swati_shah', 'swati@123'),
+    (20, 'Vivek', 'Patel', '2007-07-02', 'Male', '4th Year', '2020 Lakeview Drive, Kanpur', '+91-8765432116', 'vivek_patel', 'vivek@123');
+
+select username,password from students;
+
+
+
+
+-- Assigning students to teachers
+INSERT INTO Teacher_Student_Assignment (assignment_id, teacher_id, student_id) 
+VALUES 
+    (1, 1, 1),  -- Priya Patel assigned to Arun Kumar
+    (2, 2, 2),  -- Rahul Verma assigned to Sneha Patel
+    (3, 3, 3),  -- Ananya Singh assigned to Rahul Sharma
+    (4, 1, 4),  -- Amit Shah assigned to Arun Kumar
+    (5, 2, 5),  -- Neha Gupta assigned to Sneha Patel
+    (6, 3, 6),  -- Rohit Kumar assigned to Rahul Sharma
+    (7, 1, 7),  -- Sakshi Yadav assigned to Arun Kumar
+    (8, 2, 8),  -- Aditya Chopra assigned to Sneha Patel
+    (9, 3, 9),  -- Kritika Mishra assigned to Rahul Sharma
+    (10, 1, 10),  -- Raj Sharma assigned to Arun Kumar
+    (11, 2, 11),  -- Aishwarya Jha assigned to Sneha Patel
+    (12, 3, 12),  -- Suresh Rajput assigned to Rahul Sharma
+    (13, 1, 13),  -- Vandana Gandhi assigned to Arun Kumar
+    (14, 2, 14),  -- Rajesh Kumar assigned to Sneha Patel
+    (15, 3, 15),  -- Divya Sharma assigned to Rahul Sharma
+    (16, 1, 16),  -- Ankit Singh assigned to Arun Kumar
+    (17, 2, 17),  -- Pooja Verma assigned to Sneha Patel
+    (18, 3, 18),  -- Ravi Gupta assigned to Rahul Sharma
+    (19, 1, 19),  -- Swati Shah assigned to Arun Kumar
+    (20, 2, 20); -- Vivek Patel assigned to Sneha Patel
+    
+    
+select * from students
+join Teacher_Student_Assignment on students.student_id = Teacher_Student_Assignment.student_id
+where teacher_id = 1;
+
+
+CREATE TABLE Attendence AS
+SELECT student_id FROM students;
+
+ALTER TABLE attendence
+ADD COLUMN days INT DEFAULT 0,
+ADD COLUMN day1 TEXT DEFAULT NULL,
+ADD COLUMN day2 TEXT DEFAULT NULL,
+ADD COLUMN day3 TEXT DEFAULT NULL,
+ADD COLUMN day4 TEXT DEFAULT NULL,
+ADD COLUMN day5 TEXT DEFAULT NULL,
+ADD COLUMN day6 TEXT DEFAULT NULL,
+ADD COLUMN day7 TEXT DEFAULT NULL,
+ADD COLUMN day8 TEXT DEFAULT NULL,
+ADD COLUMN day9 TEXT DEFAULT NULL,
+ADD COLUMN day10 TEXT DEFAULT NULL,
+ADD COLUMN day11 TEXT DEFAULT NULL,
+ADD COLUMN day12 TEXT DEFAULT NULL,
+ADD COLUMN day13 TEXT DEFAULT NULL,
+ADD COLUMN day14 TEXT DEFAULT NULL,
+ADD COLUMN day15 TEXT DEFAULT NULL,
+ADD COLUMN day16 TEXT DEFAULT NULL,
+ADD COLUMN day17 TEXT DEFAULT NULL,
+ADD COLUMN day18 TEXT DEFAULT NULL,
+ADD COLUMN day19 TEXT DEFAULT NULL,
+ADD COLUMN day20 TEXT DEFAULT NULL,
+ADD COLUMN day21 TEXT DEFAULT NULL,
+ADD COLUMN day22 TEXT DEFAULT NULL,
+ADD COLUMN day23 TEXT DEFAULT NULL,
+ADD COLUMN day24 TEXT DEFAULT NULL,
+ADD COLUMN day25 TEXT DEFAULT NULL,
+ADD COLUMN day26 TEXT DEFAULT NULL,
+ADD COLUMN day27 TEXT DEFAULT NULL,
+ADD COLUMN day28 TEXT DEFAULT NULL,
+ADD COLUMN day29 TEXT DEFAULT NULL,
+ADD COLUMN day30 TEXT DEFAULT NULL,
+ADD COLUMN day31 TEXT DEFAULT NULL,
+ADD COLUMN day32 TEXT DEFAULT NULL,
+ADD COLUMN day33 TEXT DEFAULT NULL,
+ADD COLUMN day34 TEXT DEFAULT NULL,
+ADD COLUMN day35 TEXT DEFAULT NULL,
+ADD COLUMN day36 TEXT DEFAULT NULL,
+ADD COLUMN day37 TEXT DEFAULT NULL,
+ADD COLUMN day38 TEXT DEFAULT NULL,
+ADD COLUMN day39 TEXT DEFAULT NULL,
+ADD COLUMN day40 TEXT DEFAULT NULL,
+ADD COLUMN day41 TEXT DEFAULT NULL,
+ADD COLUMN day42 TEXT DEFAULT NULL,
+ADD COLUMN day43 TEXT DEFAULT NULL,
+ADD COLUMN day44 TEXT DEFAULT NULL,
+ADD COLUMN day45 TEXT DEFAULT NULL,
+ADD COLUMN day46 TEXT DEFAULT NULL,
+ADD COLUMN day47 TEXT DEFAULT NULL,
+ADD COLUMN day48 TEXT DEFAULT NULL,
+ADD COLUMN day49 TEXT DEFAULT NULL,
+ADD COLUMN day50 TEXT DEFAULT NULL;
+
+ALTER TABLE attendence
+MODIFY COLUMN days INT DEFAULT 0;
+
+
+
+select * from attendence;
+
+create view ts_assign as
+select teacher_id, student_id as stu_id
+from  teacher_student_assignment ;
+
+create view teacher_att as
+select * from attendence
+join ts_assign as ts on
+ts.student_id = attendence.student_id
+where teacher_id = 1;
+
+select * from teacher_att;
+
+
+
+DROP table attendEnce;
+
+
