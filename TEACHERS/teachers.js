@@ -1,5 +1,6 @@
 
 async function meow() {
+    alert("FACE RECOGNIZATION STARTED");
     // Send a request to the server
     fetch('http://localhost:3000/facedata', {
         method: 'POST', // or 'GET' depending on your server configuration
